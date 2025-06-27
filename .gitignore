@@ -1,0 +1,33 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Frontend
+node_modules/
+dist/
+.env
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Spring Boot and Java
+target/
+*.iml
+*.class
+*.log
+*.jar
+*.war
+*.ear
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# OS Trash
+.Trashes
+
