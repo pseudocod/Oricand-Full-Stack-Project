@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Oricând</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .email-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #151515 0%, #2c2c2c 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 50px 30px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .confirmation-badge {
+            background: #ffffff;
+            color: #151515;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            border: 2px solid #151515;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .greeting {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #151515;
+            text-align: center;
+        }
+        
+        .order-summary {
+            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px auto;
+            border-left: 4px solid #151515;
+            text-align: center;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .order-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #151515;
+            letter-spacing: 1px;
+        }
+        
+        .order-date {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .order-items {
+            margin: 25px 0;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .items-table th {
+            background: #151515;
+            color: #ffffff;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .items-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+        }
+        
+        .items-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            color: #151515;
+        }
+        
+        .quantity {
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .price {
+            text-align: right;
+            font-weight: 600;
+            color: #151515;
+        }
+        
+        .total-section {
+            background: #151515;
+            color: #ffffff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .total-label {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .total-amount {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .shipping-info {
+            margin: 40px 0;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        
+        .shipping-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #151515;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .address-block {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 3px solid #151515;
+            margin-bottom: 15px;
+        }
+        
+        .address-block:last-child {
+            margin-bottom: 0;
+        }
+        
+        .address-label {
+            font-weight: 600;
+            color: #151515;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .address-text {
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #151515 0%, #2c2c2c 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .next-drop {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #151515;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .next-drop-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .next-drop-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background-color: #151515;
+            color: #ffffff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            margin: 0 15px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #cccccc;
+        }
+        
+        .unsubscribe {
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+        
+        .unsubscribe a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .email-container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .greeting {
+                font-size: 24px;
+            }
+            
+            .logo {
+                font-size: 36px;
+            }
+            
+            .items-table th,
+            .items-table td {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+            
+            .total-amount {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo">ORICÂND</div>
+            <div class="tagline">Premium Coffee Drops</div>
+            <div class="confirmation-badge">Order Confirmed</div>
+        </div>
+        
+        <div class="content">
+            <div class="greeting">Thanks, ${customerName}!</div>
+            
+            <p style="font-size: 16px; color: #666; margin-bottom: 20px; text-align: center;">
+                Your order has been confirmed and is being prepared with the same care we put into sourcing our premium beans. 
+                You'll receive another email when your order ships.
+            </p>
+            
+            <div class="order-summary">
+                <div class="order-header">
+                    <div class="order-number">Order #${orderId}</div>
+                    <div class="order-date">${orderDate}</div>
+                </div>
+                
+                <div class="order-items">
+                    <table class="items-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th style="text-align: center;">Quantity</th>
+                                <th style="text-align: right;">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${orderItems}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="total-section">
+                    <div class="total-row">
+                        <div class="total-label">Total</div>
+                        <div class="total-amount">${totalPrice}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shipping-info">
+                <div class="shipping-title">Shipping Details</div>
+                <div class="address-block">
+                    <div class="address-label">Delivery Address</div>
+                    <div class="address-text">${deliveryAddress}</div>
+                </div>
+                <div class="address-block">
+                    <div class="address-label">Invoice Address</div>
+                    <div class="address-text">${invoiceAddress}</div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <a href="${orderUrl}" class="cta-button">Track Your Order</a>
+            </div>
+            
+            <div class="next-drop">
+                <div class="next-drop-title">Next Drop Alert</div>
+                <div class="next-drop-text">
+                    Stay tuned for our next limited release. Premium blends drop without warning – follow us to never miss out.
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-text">Follow us for the latest drops and exclusive releases</div>
+            <div class="social-links">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Twitter</a>
+                <a href="#" class="social-link">Facebook</a>
+            </div>
+            <div class="unsubscribe">
+                Questions? Contact us at <a href="mailto:oricandcoffee@gmail.com">support@oricand.com</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

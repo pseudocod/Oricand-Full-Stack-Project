@@ -1,0 +1,14 @@
+services:
+  oricand-db:
+    image: postgres:latest
+    container_name: oricand
+    environment:
+      - POSTGRES_DB=oricand-db
+      - POSTGRES_PASSWORD=devpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - oricand-db-data:/var/lib/postgresql/data
+
+volumes:
+  oricand-db-data:

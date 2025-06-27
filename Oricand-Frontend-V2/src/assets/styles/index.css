@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: Montserrat, sans-serif;
+  --font-playfair: Playfair Display, serif;
+  --font-space: Space Mono, monospace;
+  --font-courier: Courier Prime, monospace;
+  --font-bebas: Bebas Neue, sans-serif;
+  --color-offwhite: #f5f4f2;
+  --color-richblack: #151515;
+  --color-stone: #ebe9e6;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    font-family: var(--font-montserrat);
+  }
+  body {
+    background-color: var(--color-offwhite);
+  }
+}
