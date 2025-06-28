@@ -45,12 +45,21 @@ Oricand-Full-Stack-Project/
 
 ## 1. Clone the Repository
 
+### Personal Github
+
 ```bash
 git clone https://github.com/pseudocod/Oricand-Full-Stack-Project.git
 cd Oricand-Full-Stack-Project
 ```
 
 ---
+
+### UPT GitLab
+
+```bash
+git clone https://gitlab.upt.ro/vlad.mocan/Oricand-Full-Stack-Project.git
+cd Oricand-Full-Stack-Project
+```
 
 ## 2. Backend Setup
 
